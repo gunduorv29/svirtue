@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useCart } from '../context/CartContext';
 import Toast from 'react-native-toast-message';
-import Header from '../components/Header';
+import FloatingMenu from '../components/FloatingMenu';
 
 const { width } = Dimensions.get('window');
 
@@ -53,10 +54,17 @@ const products = [
 ];
 
 const ShopScreen = ({ navigation }: any) => {
+  const router = useRouter();
   const { addToCart } = useCart();
 
   const handleAddToCart = (product: any) => {
-    addToCart(product.id, product.title, product.price, product.img);
+    const item = {
+      id: product.id.toString(),
+      name: product.title,
+      price: product.price,
+      quantity: 1,
+    };
+    addToCart(item);
     Toast.show({
       type: 'success',
       text1: 'Added to Cart',
@@ -66,20 +74,20 @@ const ShopScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <Header currentScreen="Shop" />
-
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView style={styles.scrollView}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Curated Resources</Text>
-          <Text style={styles.headerSubtitle}>Tools for spiritual growth and intellectual formation</Text>
+          <Text style={styles.headerTitle}>Our Collection</Text>
+          <Text style={styles.headerSubtitle}>Formational Resources</Text>
         </View>
 
         {/* Products Grid */}
         <View style={styles.productsGrid}>
           {products.map((product) => (
-            <View key={product.id} style={styles.productCard}>
-              <Image source={{ uri: product.img }} style={styles.productImage} />
+            <TouchableOpacity key={product.id} style={styles.productCard} onPress={() => handleAddToCart(product)}>
+              <View style={styles.productImageContainer}>
+                <Text style={styles.imagePlaceholder}>[Image Here]</Text>
+              </View>
               <View style={styles.productInfo}>
                 <Text style={styles.productTitle}>{product.title}</Text>
                 <Text style={styles.productCategory}>{product.category}</Text>
@@ -91,17 +99,9 @@ const ShopScreen = ({ navigation }: any) => {
                   <Text style={styles.addToCartText}>Add to Cart</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
-
-        {/* Cart Button */}
-        <TouchableOpacity
-          style={styles.viewCartButton}
-          onPress={() => navigation.navigate('Cart')}
-        >
-          <Text style={styles.viewCartText}>View Cart</Text>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F9F8F6',
   },
-  scrollContainer: {
+  scrollView: {
     flex: 1,
   },
   header: {
@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 16,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   productCard: {
-    width: (width - 48) / 2,
+    width: '30%',
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
     marginBottom: 16,
@@ -150,10 +150,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
-  productImage: {
+  productImageContainer: {
     width: '100%',
     height: 200,
-    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  imagePlaceholder: {
+    fontSize: 14,
+    color: '#666',
   },
   productInfo: {
     padding: 16,
@@ -186,20 +192,6 @@ const styles = StyleSheet.create({
   addToCartText: {
     color: '#FFFFFF',
     fontSize: 14,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  viewCartButton: {
-    backgroundColor: '#4B2E83',
-    margin: 32,
-    padding: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  viewCartText: {
-    color: '#FFFFFF',
-    fontSize: 16,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 1,

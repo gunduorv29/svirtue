@@ -1,16 +1,243 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, TextInput, Image, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import * as Animatable from 'react-native-animatable';
-import LottieView from 'lottie-react-native';
-import Header from '../components/Header';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const { width } = Dimensions.get('window');
+
+const HomeScreen = () => {
+  const router = useRouter();
+
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {/* Hero Section */}
+        <View style={styles.heroSection}>
+          <View style={styles.heroContent}>
+            <View style={styles.welcomeBadge}>
+              <View style={styles.pulseDot} />
+              <Text style={styles.welcomeText}>Welcome to Speaking Virtue</Text>
+            </View>
+
+            <Text style={styles.heroTitle}>
+              Truth Spoken. {'\n'}
+              <Text style={styles.heroTitleCharcoal}>Virtue Lived.</Text> {'\n'}
+              <Text style={styles.heroTitleItalic}>Love Revealed.</Text>
+            </Text>
+
+            <Text style={styles.heroSubtitle}>
+              Speaking Virtue is a Catholic organisation dedicated to the spiritual, moral, and intellectual formation of the human person.
+            </Text>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.exploreButton}
+                onPress={() => router.push('/shop')}
+              >
+                <Text style={styles.exploreButtonText}>Explore Resources</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.journalButton}
+                onPress={() => router.push('/articles')}
+              >
+                <Text style={styles.journalButtonText}>Read Journal &rarr;</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Hero Animation Placeholder */}
+          <View style={styles.animationContainer}>
+            <Text style={styles.animationPlaceholder}>[Lottie Animation Here]</Text>
+          </View>
+        </View>
+
+        {/* Why Virtue Matters */}
+        <View style={styles.virtuesSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Why Virtue Matters Today</Text>
+            <View style={styles.sectionDivider} />
+            <Text style={styles.sectionDescription}>
+              In an age marked by moral relativism, Speaking Virtue exists as a steady and faithful voice. Virtue is the discipline that orders desire, strengthens the will, and aligns human freedom with divine wisdom.
+            </Text>
+          </View>
+
+          {/* Theological Virtues */}
+          <View style={styles.theologicalSection}>
+            <View style={styles.virtueHeader}>
+              <View style={styles.headerLine} />
+              <Text style={styles.virtueTitle}>The Theological Virtues</Text>
+              <View style={styles.headerLine} />
+            </View>
+
+            <View style={styles.virtuesGrid}>
+              <TouchableOpacity style={styles.virtueCard}>
+                <View style={styles.iconCircle}>
+                  <Text style={styles.iconText}>🙏</Text>
+                </View>
+                <Text style={styles.virtueName}>Faith</Text>
+                <Text style={styles.virtueDescription}>Orienting the intellect toward God.</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.virtueCard}>
+                <View style={styles.iconCircle}>
+                  <Text style={styles.iconText}>🕊️</Text>
+                </View>
+                <Text style={styles.virtueName}>Hope</Text>
+                <Text style={styles.virtueDescription}>Orienting the will toward God as our happiness.</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.virtueCard}>
+                <View style={styles.iconCircle}>
+                  <Text style={styles.iconText}>❤️</Text>
+                </View>
+                <Text style={styles.virtueName}>Charity</Text>
+                <Text style={styles.virtueDescription}>Union with God through love.</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Cardinal Virtues */}
+          <View style={styles.cardinalSection}>
+            <View style={styles.virtueHeader}>
+              <View style={styles.headerLine} />
+              <Text style={styles.virtueTitle}>The Cardinal Virtues</Text>
+              <View style={styles.headerLine} />
+            </View>
+
+            <View style={styles.cardinalGrid}>
+              <View style={styles.cardinalCard}>
+                <Text style={styles.cardinalIcon}>🧠</Text>
+                <Text style={styles.cardinalName}>Prudence</Text>
+                <Text style={styles.cardinalDescription}>Ordering Moral Life</Text>
+              </View>
+
+              <View style={styles.cardinalCard}>
+                <Text style={styles.cardinalIcon}>⚖️</Text>
+                <Text style={styles.cardinalName}>Justice</Text>
+                <Text style={styles.cardinalDescription}>Giving What Is Due</Text>
+              </View>
+
+              <View style={styles.cardinalCard}>
+                <Text style={styles.cardinalIcon}>🛡️</Text>
+                <Text style={styles.cardinalName}>Fortitude</Text>
+                <Text style={styles.cardinalDescription}>Courage In Difficulty</Text>
+              </View>
+
+              <View style={styles.cardinalCard}>
+                <Text style={styles.cardinalIcon}>🤝</Text>
+                <Text style={styles.cardinalName}>Temperance</Text>
+                <Text style={styles.cardinalDescription}>Moderation of Pleasure</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Parallax Quote */}
+        <View style={styles.quoteSection}>
+          <Text style={styles.quoteIcon}>❝</Text>
+          <Text style={styles.quoteText}>
+            "No greater joy can I have than this, to hear that my children follow the truth."
+          </Text>
+          <View style={styles.quoteAuthorContainer}>
+            <View style={styles.authorLine} />
+            <Text style={styles.quoteAuthor}>3 John 1:4</Text>
+            <View style={styles.authorLine} />
+          </View>
+        </View>
+
+        {/* What You Will Find Here */}
+        <View style={styles.offeringsSection}>
+          <View style={styles.offeringsHeader}>
+            <View style={styles.offeringsLeft}>
+              <Text style={styles.offeringsLabel}>Our Offerings</Text>
+              <Text style={styles.offeringsTitle}>Curated for the Soul</Text>
+              <View style={styles.offeringsList}>
+                <Text style={styles.offeringItem}>✓ In-depth Articles grounded in Tradition</Text>
+                <Text style={styles.offeringItem}>✓ Creative Expressions of faith</Text>
+                <Text style={styles.offeringItem}>✓ Formational Resources</Text>
+                <Text style={styles.offeringItem}>✓ A Faithful Community</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              style={styles.viewResourcesButton}
+              onPress={() => router.push('/shop')}
+            >
+              <Text style={styles.viewResourcesText}>View Resources &rarr;</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Featured Products Preview */}
+          <View style={styles.productsGrid}>
+            <TouchableOpacity style={styles.productCard} onPress={() => router.push('/shop')}>
+              <View style={styles.productImageContainer}>
+                <Text style={styles.imagePlaceholder}>[Image Here]</Text>
+                <View style={styles.shopNowBadge}>
+                  <Text style={styles.shopNowText}>Shop Now</Text>
+                </View>
+              </View>
+              <Text style={styles.productTitle}>Speaking Virtue: Vol I</Text>
+              <Text style={styles.productCategory}>Resources</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.productCard} onPress={() => router.push('/shop')}>
+              <View style={styles.productImageContainer}>
+                <Text style={styles.imagePlaceholder}>[Image Here]</Text>
+                <View style={styles.shopNowBadge}>
+                  <Text style={styles.shopNowText}>Shop Now</Text>
+                </View>
+              </View>
+              <Text style={styles.productTitle}>The Daily Stoic Journal</Text>
+              <Text style={styles.productCategory}>Formation</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.productCard} onPress={() => router.push('/shop')}>
+              <View style={styles.productImageContainer}>
+                <Text style={styles.imagePlaceholder}>[Image Here]</Text>
+                <View style={styles.shopNowBadge}>
+                  <Text style={styles.shopNowText}>Shop Now</Text>
+                </View>
+              </View>
+              <Text style={styles.productTitle}>Visual Arts Tee</Text>
+              <Text style={styles.productCategory}>Expressions</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Newsletter Section */}
+        <View style={styles.newsletterSection}>
+          <View style={styles.newsletterContent}>
+            <View style={styles.newsletterIcon}>
+              <Text style={styles.newsletterIconText}>✉️</Text>
+            </View>
+            <Text style={styles.newsletterTitle}>Join the Order</Text>
+            <Text style={styles.newsletterSubtitle}>
+              Subscribe to receive our weekly dispatch on philosophy, art, and the pursuit of excellence. No spam, only substance.
+            </Text>
+            <View style={styles.newsletterForm}>
+              <TextInput
+                style={styles.newsletterInput}
+                placeholder="Email Address"
+                placeholderTextColor="#ffffff80"
+                keyboardType="email-address"
+              />
+              <TouchableOpacity style={styles.subscribeButton}>
+                <Text style={styles.subscribeButtonText}>Subscribe</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F8F6',
+  },
+  scrollView: {
+    flex: 1,
   },
   scrollContainer: {
     flex: 1,
@@ -135,6 +362,8 @@ const styles = StyleSheet.create({
   },
   animationContainer: {
     flex: 1,
+    textAlign: 'center',
+    marginBottom: 24,
     height: width > 768 ? Dimensions.get('window').height * 0.7 : Dimensions.get('window').height * 0.5,
     position: 'relative',
   },
@@ -170,6 +399,14 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(75, 46, 131, 0.2)',
+  },
+  animationPlaceholder: {
+    fontSize: 14,
+    color: '#666',
+  },
+  imagePlaceholder: {
+    fontSize: 14,
+    color: '#666',
   },
   virtuesSection: {
     paddingVertical: 128,
@@ -553,253 +790,5 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
   },
 });
-
-const HomeScreen = () => {
-  const navigation = useNavigation();
-
-  const theologicalVirtues = [
-    { name: 'Faith', icon: 'fas fa-praying-hands', description: 'Orienting the intellect toward God.', color: '#4B2E83' },
-    { name: 'Hope', icon: 'fas fa-dove', description: 'Orienting the will toward God as our happiness.', color: '#8B1538' },
-    { name: 'Charity', icon: 'fas fa-heart', description: 'Union with God through love.', color: '#6B3FA0' },
-  ];
-
-  const cardinalVirtues = [
-    { name: 'Prudence', icon: 'fas fa-brain', description: 'Ordering Moral Life', color: '#4B2E83' },
-    { name: 'Justice', icon: 'fas fa-balance-scale', description: 'Giving What Is Due', color: '#8B1538' },
-    { name: 'Fortitude', icon: 'fas fa-shield-alt', description: 'Courage In Difficulty', color: '#6B3FA0' },
-    { name: 'Temperance', icon: 'fas fa-hand-holding-heart', description: 'Moderation of Pleasure', color: '#4B2E83' },
-  ];
-
-  const products = [
-    { title: 'Speaking Virtue: Vol I', category: 'Resources', image: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=600&auto=format&fit=crop' },
-    { title: 'The Daily Stoic Journal', category: 'Formation', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop' },
-    { title: 'Visual Arts Tee', category: 'Expressions', image: 'https://images.unsplash.com/photo-1534644107580-3a4dbd494a95?q=80&w=600&auto=format&fit=crop' },
-  ];
-
-  return (
-    <View style={styles.container}>
-      <Header currentScreen="Home" />
-
-      <ScrollView style={styles.scrollContainer}>
-        {/* Hero Section */}
-        <View style={styles.heroSection}>
-          {/* Ambient Background Blobs */}
-          <View style={styles.blob1} />
-          <View style={styles.blob2} />
-
-          <View style={styles.heroContent}>
-            {/* Text Content */}
-            <Animatable.View animation="fadeInUp" duration={1000} style={styles.textContent}>
-              <View style={styles.welcomeBadge}>
-                <View style={styles.pulseDot} />
-                <Text style={styles.welcomeText}>Welcome to Speaking Virtue</Text>
-              </View>
-
-              <Text style={styles.heroTitle}>
-                Truth Spoken. {'\n'}
-                <Text style={styles.heroTitleCharcoal}>Virtue Lived.</Text> {'\n'}
-                <Text style={styles.heroTitleItalic}>Love Revealed.</Text>
-              </Text>
-
-              <Text style={styles.heroSubtitle}>
-                Speaking Virtue is a Catholic organisation dedicated to the spiritual, moral, and intellectual formation of the human person.
-              </Text>
-
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  style={styles.exploreButton}
-                  onPress={() => navigation.navigate('Shop' as never)}
-                >
-                  <Text style={styles.exploreButtonText}>Explore Resources</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.journalButton}
-                  onPress={() => navigation.navigate('Articles' as never)}
-                >
-                  <Text style={styles.journalButtonText}>Read Journal &rarr;</Text>
-                </TouchableOpacity>
-              </View>
-            </Animatable.View>
-
-            {/* Hero Animation */}
-            <Animatable.View animation="fadeIn" duration={1000} delay={500} style={styles.animationContainer}>
-              <View style={styles.animationBorder} />
-              <View style={styles.animationBackground}>
-                <LottieView
-                  source={{ uri: 'https://assets-v2.lottiefiles.com/a/fa9161a4-1171-11ee-8990-0353a32339af/3HLUTCrfHC.lottie' }}
-                  autoPlay
-                  loop
-                  speed={0.8}
-                  style={styles.lottie}
-                />
-                <View style={styles.animationOverlay} />
-              </View>
-            </Animatable.View>
-          </View>
-        </View>
-
-        {/* Why Virtue Matters (Pillars) */}
-        <View style={styles.virtuesSection}>
-          <View style={styles.textureOverlay} />
-
-          <View style={styles.virtuesContent}>
-            <Animatable.View animation="fadeInUp" duration={1000} style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Why Virtue Matters Today</Text>
-              <View style={styles.sectionDivider} />
-              <Text style={styles.sectionDescription}>
-                In an age marked by moral relativism, Speaking Virtue exists as a steady and faithful voice. Virtue is the discipline that orders desire, strengthens the will, and aligns human freedom with divine wisdom.
-              </Text>
-            </Animatable.View>
-
-            {/* Theological Virtues */}
-            <View style={styles.theologicalSection}>
-              <View style={styles.virtueHeader}>
-                <View style={styles.headerLine} />
-                <Text style={styles.virtueTitle}>The Theological Virtues</Text>
-                <View style={styles.headerLine} />
-              </View>
-
-              <View style={styles.virtuesGrid}>
-                {theologicalVirtues.map((virtue, index) => (
-                  <Animatable.View
-                    key={virtue.name}
-                    animation="fadeInUp"
-                    duration={800}
-                    delay={index * 200}
-                    style={[styles.virtueCard, { backgroundColor: '#F5F2EB' }]}
-                  >
-                    <View style={[styles.iconCircle, { backgroundColor: 'white' }]}>
-                      <Text style={[styles.iconText, { color: virtue.color }]}>{virtue.icon.split(' ')[1]}</Text>
-                    </View>
-                    <Text style={styles.virtueName}>{virtue.name}</Text>
-                    <Text style={styles.virtueDescription}>{virtue.description}</Text>
-                  </Animatable.View>
-                ))}
-              </View>
-            </View>
-
-            {/* Cardinal Virtues */}
-            <View style={styles.cardinalSection}>
-              <View style={styles.virtueHeader}>
-                <View style={styles.headerLine} />
-                <Text style={styles.virtueTitle}>The Cardinal Virtues</Text>
-                <View style={styles.headerLine} />
-              </View>
-              <View style={styles.cardinalGrid}>
-                {cardinalVirtues.map((virtue, index) => (
-                  <Animatable.View
-                    key={virtue.name}
-                    animation="fadeInUp"
-                    duration={800}
-                    delay={index * 100}
-                    style={styles.cardinalCard}
-                  >
-                    <Text style={[styles.cardinalIcon, { color: virtue.color }]}>{virtue.icon}</Text>
-                    <Text style={styles.cardinalName}>{virtue.name}</Text>
-                    <Text style={styles.cardinalDescription}>{virtue.description}</Text>
-                  </Animatable.View>
-                ))}
-              </View>
-            </View>
-          </View>
-        </View>
-
-        {/* Parallax Quote */}
-        <View style={styles.quoteSection}>
-          <View style={styles.quoteOverlay} />
-          <View style={styles.quoteContent}>
-            <Text style={styles.quoteIcon}>fas fa-quote-left</Text>
-            <Text style={styles.quoteText}>
-              "No greater joy can I have than this, to hear that my children follow the truth."
-            </Text>
-            <View style={styles.quoteAuthorContainer}>
-              <View style={styles.authorLine} />
-              <Text style={styles.quoteAuthor}>3 John 1:4</Text>
-              <View style={styles.authorLine} />
-            </View>
-          </View>
-        </View>
-
-        {/* What You Will Find Here */}
-        <View style={styles.offeringsSection}>
-          <View style={styles.offeringsContent}>
-            <View style={styles.offeringsHeader}>
-              <View style={styles.offeringsLeft}>
-                <Text style={styles.offeringsLabel}>Our Offerings</Text>
-                <Text style={styles.offeringsTitle}>Curated for the Soul</Text>
-                <View style={styles.offeringsList}>
-                  <Text style={styles.offeringItem}>fas fa-check-circle In-depth Articles grounded in Tradition</Text>
-                  <Text style={styles.offeringItem}>fas fa-check-circle Creative Expressions of faith</Text>
-                  <Text style={styles.offeringItem}>fas fa-check-circle Formational Resources</Text>
-                  <Text style={styles.offeringItem}>fas fa-check-circle A Faithful Community</Text>
-                </View>
-              </View>
-              <TouchableOpacity
-                style={styles.viewResourcesButton}
-                onPress={() => navigation.navigate('Shop' as never)}
-              >
-                <Text style={styles.viewResourcesText}>View Resources &rarr;</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* Featured Products Preview */}
-            <View style={styles.productsGrid}>
-              {products.map((product, index) => (
-                <Animatable.View
-                  key={product.title}
-                  animation="fadeInUp"
-                  duration={800}
-                  delay={index * 200}
-                  style={styles.productCard}
-                >
-                  <TouchableOpacity onPress={() => navigation.navigate('Shop' as never)}>
-                    <View style={styles.productImageContainer}>
-                      <Image source={{ uri: product.image }} style={styles.productImage} />
-                      <View style={styles.productOverlay} />
-                      <View style={styles.shopNowBadge}>
-                        <Text style={styles.shopNowText}>Shop Now</Text>
-                      </View>
-                    </View>
-                    <Text style={styles.productTitle}>{product.title}</Text>
-                    <Text style={styles.productCategory}>{product.category}</Text>
-                  </TouchableOpacity>
-                </Animatable.View>
-              ))}
-            </View>
-          </View>
-        </View>
-
-        {/* Newsletter Section */}
-        <View style={styles.newsletterSection}>
-          {/* Abstract Shapes */}
-          <View style={styles.newsletterShape1} />
-          <View style={styles.newsletterShape2} />
-
-          <Animatable.View animation="fadeInUp" duration={1000} style={styles.newsletterContent}>
-            <View style={styles.newsletterIcon}>
-              <Text style={styles.newsletterIconText}>fas fa-envelope-open-text</Text>
-            </View>
-            <Text style={styles.newsletterTitle}>Join the Order</Text>
-            <Text style={styles.newsletterSubtitle}>
-              Subscribe to receive our weekly dispatch on philosophy, art, and the pursuit of excellence. No spam, only substance.
-            </Text>
-            <View style={styles.newsletterForm}>
-              <TextInput
-                style={styles.newsletterInput}
-                placeholder="Email Address"
-                placeholderTextColor="#ffffff80"
-                keyboardType="email-address"
-              />
-              <TouchableOpacity style={styles.subscribeButton}>
-                <Text style={styles.subscribeButtonText}>Subscribe</Text>
-              </TouchableOpacity>
-            </View>
-          </Animatable.View>
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
 
 export default HomeScreen;

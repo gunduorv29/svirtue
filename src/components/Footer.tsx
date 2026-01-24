@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Footer = () => {
   const navigation = useNavigation();
@@ -31,19 +32,19 @@ const Footer = () => {
                 style={styles.socialButton}
                 onPress={() => handleSocialLink('https://www.instagram.com/speaking_virtue/')}
               >
-                <Text style={styles.socialIcon}>📷</Text>
+                <Icon name="instagram" size={20} color="rgba(255,255,255,0.6)" />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.socialButton}
                 onPress={() => handleSocialLink('https://twitter.com/speakingvirtue')}
               >
-                <Text style={styles.socialIcon}>🐦</Text>
+                <Icon name="twitter" size={20} color="rgba(255,255,255,0.6)" />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.socialButton}
-                onPress={() => handleSocialLink('https://youtube.com/@speakingvirtue')}
+                onPress={() => handleSocialLink('https://linkedin.com/company/speakingvirtue')}
               >
-                <Text style={styles.socialIcon}>📺</Text>
+                <Icon name="linkedin" size={20} color="rgba(255,255,255,0.6)" />
               </TouchableOpacity>
             </View>
           </View>
@@ -93,25 +94,6 @@ const styles = StyleSheet.create({
     paddingTop: 48,
     paddingBottom: 32,
     position: 'relative',
-    overflow: 'hidden',
-  },
-  pattern: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 0.1,
-    backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.8) 1px, transparent 0)',
-    backgroundSize: '40px 40px',
-  },
-  gradient: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 128,
-    backgroundColor: 'rgba(0,0,0,0.4)',
   },
   content: {
     paddingHorizontal: 24,
@@ -189,6 +171,23 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.4)',
     textTransform: 'uppercase',
     letterSpacing: 2,
+  },
+  pattern: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    opacity: 0.1,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+  },
+  gradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 128,
+    backgroundColor: 'rgba(0,0,0,0.4)',
   },
 });
 

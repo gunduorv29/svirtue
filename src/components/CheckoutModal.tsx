@@ -26,6 +26,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ visible, onClose }) => {
   const [provider, setProvider] = useState<'paystack' | 'flutterwave'>('paystack');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -65,13 +66,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ visible, onClose }) => {
       const paymentData = await paymentResponse.json();
 
       if (paymentData.success && paymentData.paymentUrl) {
-        // In a real app, you'd open the payment URL in a webview or redirect
-        Alert.alert('Payment Initialized', 'Redirecting to payment gateway...', [
-          { text: 'OK', onPress: () => {
-            clearCart();
-            onClose();
-          }}
-        ]);
+        setPaymentUrl(paymentData.paymentUrl);
       } else {
         throw new Error(paymentData.message || 'Payment initialization failed');
       }
@@ -103,7 +98,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ visible, onClose }) => {
               <Text style={styles.summaryTitle}>Order Summary</Text>
               {cart.map((item, index) => (
                 <View key={index} style={styles.item}>
-                  <Text style={styles.itemName}>{item.title}</Text>
+                  <Text style={styles.itemName}>{item.name}</Text>
                   <Text style={styles.itemPrice}>${item.price} × {item.quantity}</Text>
                 </View>
               ))}
@@ -312,6 +307,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  webview: {
+    flex: 1,
+    height: 400,
   },
 });
 
