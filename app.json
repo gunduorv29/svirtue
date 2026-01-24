@@ -6,28 +6,27 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "speaking-virtue",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-  "ios": {
-    "supportsTablet": true,
-    "newArchEnabled": false
-  },
-  "android": {
-    "adaptiveIcon": {
-      "foregroundImage": "./assets/adaptive-icon.png",
-      "backgroundColor": "#ffffff"
+    "ios": {
+      "supportsTablet": true
     },
-    "edgeToEdgeEnabled": true,
-    "predictiveBackGestureEnabled": false,
-    "newArchEnabled": false
-  },
-  "web": {
-    "favicon": "./assets/favicon.png",
-    "newArchEnabled": false
-  },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.SpeakingVirtueWeb"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
     "plugins": [
       "expo-font"
     ]
