@@ -177,8 +177,6 @@ PAYSTACK_SECRET_KEY=sk_live_...
 FLUTTERWAVE_SECRET_KEY=FLWSECK_...
 ```
 
-> ⚠️ Never commit your `.env` file — it is already listed in `.gitignore`.
-
 ---
 
 ## Screens & Navigation
@@ -222,24 +220,6 @@ User taps "Proceed to Checkout"
 
 ---
 
-## Known Issues Fixed
-
-| # | File | Bug | Fix |
-|---|---|---|---|
-| 1 | `utils/api.ts` | `import axios from 'axios'` — **axios is not in `package.json`** → immediate runtime crash on launch | Replaced entirely with native `fetch` API; added typed request helpers |
-| 2 | `.vscode/launch.json` | `"program": "tsconfig.json"` — VS Code would fail to launch the debugger (tsconfig is not a script) | Changed to `"${workspaceFolder}/index.js"` |
-| 3 | `app/articles.tsx` | `openPDF()` only called `console.log('Opening PDF:', pdfPath)` — PDFs never opened | Implemented with `Linking.openURL()` on native and `window.open()` on web; added `Alert` fallback if no viewer found |
-| 4 | `components/DrawerMenu.tsx` | Drawer is anchored at `right: 0` but `slideAnim` started at `-width` (negative), causing it to fly in from the **left** across the full screen | Changed initial value to `+width` so the drawer correctly enters from the right |
-| 5 | `src/hooks/useCustomHook.ts` | Stale closure: `setCount(count + 1)` reads `count` captured at creation time — rapid calls all see the same value and increments are lost | Changed to functional updater: `setCount(prev => prev + 1)` |
-| 6 | `src/context/AuthContext.tsx` | Wrong Google OAuth URL: `accounts.google.com/oauth/v2/auth` (doesn't exist) — every login attempt returned 404 | Fixed to `accounts.google.com/o/oauth2/v2/auth` (correct path includes `/o/`) |
-| 7 | `index.js` | Completely empty — Expo had no entry point and would fail to start | Added `import 'expo-router/entry'` |
-| 8 | `metro.config.js` | Completely empty — Metro bundler fell back to bare defaults; asset resolution and NativeWind would silently fail | Added standard `@expo/metro-config` + `withNativeWind` setup |
-| 9 | `app/cart.tsx` | `<TouchableOpacity style={styles.checkoutButton}>` had **no `onPress`** — `CheckoutModal` was never mounted or triggered | Added `isCheckoutOpen` state, wired `onPress={() => setIsCheckoutOpen(true)}`, rendered `<CheckoutModal />` |
-| 10 | `tsconfig.json` | `"compilerOptions": {}` was completely empty — no strict type checking, no JSX target, no path aliases | Added `strict`, `jsx`, `baseUrl`, `paths` (`~/*`), `moduleResolution`, and other standard Expo TS settings |
-| 11 | `package.json` | `"expo-router": "^6.0.22"` — **incompatible with Expo 54** which requires `~4.x`; would crash on install or at runtime with peer dependency conflicts | Corrected to `"~4.0.17"` |
-| 12 | `src/context/AuthContext.tsx` | `GOOGLE_CLIENT_ID` fallback was the literal string `'YOUR_GOOGLE_CLIENT_ID'` — OAuth requests would silently fire with a junk client ID | Removed the insecure fallback; added a `console.error` in `__DEV__` mode so missing config is immediately visible |
-
----
 
 ## Deployment
 
